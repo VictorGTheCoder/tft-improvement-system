@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TFT Challenger Lab — Guidance</title>
+  <style>
+    :root{color-scheme:dark;font-family:Inter,system-ui,sans-serif}*{box-sizing:border-box}body{margin:0;background:#0b0f17;color:#f5f7fb;overflow:hidden}.coach{position:fixed;z-index:10;top:16px;left:50%;transform:translateX(-50%);width:min(760px,calc(100vw - 24px));padding:16px 18px;border:1px solid #39445b;border-radius:14px;background:rgba(20,25,36,.97);box-shadow:0 20px 70px rgba(0,0,0,.45);display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center}.coach[hidden]{display:none}.eyebrow{margin:0 0 4px;color:#aab4c8;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.coach h1{margin:0 0 5px;font-size:1.15rem}.coach p{margin:0;color:#c3cad8;line-height:1.45}.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.actions button{border:1px solid #45516a;border-radius:9px;padding:9px 12px;background:#252e40;color:#fff;font:inherit;cursor:pointer}.actions .primary{background:#7557e8;border-color:#7557e8;font-weight:700}iframe{width:100vw;height:100vh;border:0;background:#10131a}@media(max-width:680px){.coach{grid-template-columns:1fr}.actions{justify-content:flex-start}}
+  </style>
+</head>
+<body>
+  <aside id="coach" class="coach" aria-live="polite">
+    <div><p class="eyebrow">Coach du jour</p><h1 id="coachTitle">Analyse de la journée…</h1><p id="coachText"></p></div>
+    <div class="actions"><button id="dismissBtn">Plus tard</button><button id="coachAction" class="primary">Commencer</button></div>
+  </aside>
+  <iframe id="app" src="index.html" title="TFT Challenger Lab"></iframe>
+  <script>
+    'use strict';
+    const STORAGE_KEY='tft_challenger_lab_v2';
+    const today=()=>new Date().toISOString().slice(0,10);
+    const readState=()=>{try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}catch{return {}}};
+    const datedToday=value=>typeof value==='string'&&value.slice(0,10)===today();
+    function recommendation(state){
+      const matches=Array.isArray(state.matches)?state.matches:[];
+      const decisions=Array.isArray(state.decisions)?state.decisions:[];
+      const reviews=Array.isArray(state.reviews)?state.reviews:[];
+      const drills=Array.isArray(state.drills)?state.drills:[];
+      const goals=Array.isArray(state.goals)?state.goals:[];
+      const gamesToday=matches.filter(m=>datedToday(m.date||m.createdAt)).length;
+      const dueDrills=drills.filter(d=>!d.suspended&&d.due&&d.due<=today()).length;
+      const openReviews=reviews.filter(r=>r.status==='open').length;
+      const activeGoal=goals.some(g=>g.active);
+      const firstVisit=localStorage.getItem('tft_guidance_last_day')!==today();
+      if(!activeGoal)return{title:firstVisit?'Nouveau jour : choisis une intention':'Définis l’objectif du bloc',text:'Avant de lancer une partie, choisis une compétence et une règle observable. Une seule priorité suffit.',view:'dashboard',label:'Définir l’objectif'};
+      if(dueDrills>0)return{title:`${dueDrills} drill${dueDrills>1?'s':''} à réviser`,text:'Commence par quelques minutes de rappel actif avant de rejouer. Arrête après le premier petit bloc.',view:'drills',label:'Faire les drills'};
+      if(gamesToday>=3&&openReviews>0)return{title:`${gamesToday} parties aujourd’hui : fais une pause`,text:`Tu as ${openReviews} review${openReviews>1?'s':''} ouverte${openReviews>1?'s':''}. Analyse maintenant une seule décision à forte valeur avant d’enchaîner.`,view:'reviews',label:'Lancer une review'};
+      if(gamesToday>=3)return{title:`Bloc de ${gamesToday} parties terminé`,text:'Avant de relancer, regarde tes décisions du jour et sélectionne la plus incertaine ou la plus coûteuse pour une review.',view:'decisions',label:'Voir les décisions'};
+      if(gamesToday===0)return{title:firstVisit?'Ton plan du jour est prêt':'Commence un bloc court',text:'Joue une à trois parties avec ton objectif actif, puis reviens capturer la décision la plus importante.',view:'capture',label:'Préparer la capture'};
+      return{title:`${gamesToday} partie${gamesToday>1?'s':''} dans le bloc`,text:'Continue jusqu’à trois parties maximum, puis passe en review. Capture seulement les décisions importantes.',view:'capture',label:'Ajouter une décision'};
+    }
+    function openView(view){
+      const doc=document.getElementById('app').contentDocument;
+      if(!doc)return;
+      if(view==='capture'){doc.getElementById('quickCaptureBtn')?.click();return;}
+      doc.querySelector(`[data-view="${view}"]`)?.click();
+    }
+    function render(){
+      const rec=recommendation(readState());
+      document.getElementById('coachTitle').textContent=rec.title;
+      document.getElementById('coachText').textContent=rec.text;
+      const action=document.getElementById('coachAction');
+      action.textContent=rec.label;
+      action.onclick=()=>{openView(rec.view);document.getElementById('coach').hidden=true;localStorage.setItem('tft_guidance_last_day',today())};
+    }
+    document.getElementById('dismissBtn').onclick=()=>{document.getElementById('coach').hidden=true;localStorage.setItem('tft_guidance_last_day',today())};
+    document.getElementById('app').addEventListener('load',render);
+    window.addEventListener('storage',render);
+  </script>
+</body>
+</html>
