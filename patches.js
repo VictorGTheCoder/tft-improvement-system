@@ -76,9 +76,7 @@
   const matchDate = document.getElementById('matchDate');
   if (matchDate && !document.getElementById('editingMatchId')?.value) matchDate.value = localToday();
 
-  const originalRenderDecisions = renderDecisions;
-  renderDecisions = function renderDecisionsWithDelete() {
-    originalRenderDecisions();
+  function decorateDecisionDeletes() {
     document.querySelectorAll('#decisionTable [data-decision-id]').forEach(openButton => {
       const decision = state.decisions.find(item => item.id === openButton.dataset.decisionId);
       const cell = openButton.closest('td');
@@ -91,7 +89,21 @@
       deleteButton.setAttribute('aria-label', `Supprimer la décision ${decision.stage} ${decision.category}`);
       cell.append(' ', deleteButton);
     });
+  }
+
+  const originalRenderDecisions = renderDecisions;
+  renderDecisions = function renderDecisionsWithDelete() {
+    originalRenderDecisions();
+    decorateDecisionDeletes();
   };
+
+  const decisionTable = document.getElementById('decisionTable');
+  if (decisionTable) {
+    new MutationObserver(decorateDecisionDeletes).observe(decisionTable, {
+      childList: true,
+      subtree: true
+    });
+  }
 
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-delete-match]');
