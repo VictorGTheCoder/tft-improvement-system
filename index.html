@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131a">
+  <title>TFT Challenger Lab</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigation principale">
+      <a class="brand" href="#dashboard" data-view="dashboard"><span><strong>Challenger Lab</strong><small>Journal d’entraînement TFT</small></span></a>
+      <nav class="tabs" aria-label="Sections">
+        <button data-view="dashboard" class="active" aria-current="page">Aujourd’hui</button>
+        <button data-view="decisions">Décisions</button>
+        <button data-view="reviews">Reviews <span id="reviewNavCount" class="nav-count" hidden></span></button>
+        <button data-view="drills">Drills <span id="drillNavCount" class="nav-count" hidden></span></button>
+        <button class="nav-secondary" data-view="watchlist">Watchlist</button>
+        <button class="nav-secondary" data-view="data">Données</button>
+        <button id="moreNav" class="more-nav" type="button" aria-haspopup="dialog">Plus</button>
+      </nav>
+      <div class="sidebar-foot"><span class="local-dot" aria-hidden="true"></span><span>Données locales uniquement</span></div>
+    </aside>
+
+    <div class="app-main">
+      <header class="app-header">
+        <div class="page-context"><p class="eyebrow">Bloc d’entraînement</p><p id="headerGoal">Définissez un objectif mesurable pour commencer.</p></div>
+        <div class="header-actions"><span id="saveStatus" class="save-status" role="status" aria-live="polite">Chargement…</span><button id="exportBtn" class="button button-quiet">Exporter</button><button id="quickCaptureBtn" class="button button-primary">Ajouter une décision <kbd>⌘K</kbd></button></div>
+      </header>
+
+      <main id="main-content">
+        <section id="dashboard" class="view active" aria-labelledby="today-heading">
+          <div class="page-heading page-heading-compact"><div><p class="eyebrow">Journal d’entraînement</p><h1 id="today-heading">Aujourd’hui</h1></div></div>
+          <article class="training-strip"><div class="goal-context"><p class="eyebrow">Objectif du bloc</p><div id="currentGoal" class="goal-statement">Définissez une règle mesurable.</div><button id="editGoalBtn" class="text-button" type="button" hidden>Modifier l’objectif</button></div><form id="goalForm" class="goal-form"><div><label for="goalSkill">Compétence</label><select id="goalSkill"></select></div><div><label for="goalText">Règle</label><input id="goalText" placeholder="Ex. Scout avant chaque augment."></div><button class="button button-secondary">Mettre à jour</button></form></article>
+          <article id="todayWorklist" class="worklist" aria-label="Travail à traiter">
+            <header class="worklist-header"><div><p class="eyebrow">File de travail</p><h2>À traiter</h2></div><p id="worklistSummary" class="muted"></p></header>
+            <section class="work-section"><div class="work-section-heading"><h3>Reviews</h3><button class="text-button" data-view="reviews">Voir tout</button></div><div id="reviewPreview" class="work-rows"></div></section>
+            <section class="work-section"><div class="work-section-heading"><h3>Drills dus</h3><button class="text-button" data-view="drills">Démarrer</button></div><div id="drillPreview" class="work-rows"></div></section>
+            <section class="work-section"><div class="work-section-heading"><h3>Ajoutées récemment</h3><button class="text-button" data-view="decisions">Historique</button></div><div id="recentDecisions" class="work-rows"></div></section>
+          </article>
+          <aside id="backupNudge" class="backup-nudge" aria-label="Rappel de sauvegarde"></aside>
+        </section>
+
+        <section id="decisions" class="view" aria-labelledby="decisions-heading">
+          <div class="page-heading"><div><p class="eyebrow">Historique</p><h1 id="decisions-heading">Décisions</h1><p class="lede">Recherchez les situations passées sans ouvrir chaque partie.</p></div></div>
+          <article class="panel filters-panel"><div class="search-field"><label class="sr-only" for="decisionSearch">Rechercher une décision</label><input id="decisionSearch" type="search" placeholder="Rechercher une décision, un principe, un contexte…"></div><div class="filter-group"><label for="decisionSkillFilter">Compétence</label><select id="decisionSkillFilter"><option value="">Toutes</option></select></div><div class="filter-group"><label for="decisionReviewFilter">Review</label><select id="decisionReviewFilter"><option value="">Tous les statuts</option><option value="open">À revoir</option><option value="done">Terminée</option><option value="none">Sans review</option></select></div></article>
+          <article class="panel table-panel"><div class="table-meta" id="decisionResultCount"></div><div id="decisionTable"></div></article>
+        </section>
+
+        <section id="capture" class="view" aria-labelledby="captureTitle">
+          <div class="page-heading capture-heading"><div><p class="eyebrow">Capture rapide</p><h1 id="captureTitle">Ajouter une décision</h1><p class="lede">Commencez par ce qui était visible, ce que vous avez fait, et ce qui s’est passé. Les détails viendront en review.</p></div><button id="cancelEditBtn" class="button button-quiet" hidden>Annuler l’édition</button></div>
+          <form id="matchForm" class="capture-form" novalidate><div id="captureErrorSummary" class="error-summary" role="alert" aria-live="assertive" tabindex="-1" hidden></div><input id="editingMatchId" type="hidden">
+            <article class="panel essential-panel"><div class="section-heading"><div><p class="eyebrow">Essentiel · moins de deux minutes</p><h2>La situation</h2></div><span class="required-note">* requis pour une review exploitable</span></div>
+              <div class="form-grid essential-grid"><div class="field"><label for="category">Compétence *</label><select id="category" required></select></div><div class="field"><label for="stage">Étape *</label><select id="stage" required></select></div><div class="field field-wide"><label for="context">Contexte observable *</label><textarea id="context" rows="3" required placeholder="Board, or, PV, items, lobby, contest…"></textarea></div><div class="field field-wide"><label for="actionTaken">Décision prise *</label><textarea id="actionTaken" rows="3" required placeholder="Ce que vous avez réellement fait."></textarea></div><div class="field field-wide"><label for="outcome">Résultat <span class="field-optional">facultatif</span></label><textarea id="outcome" rows="2" placeholder="Inconnu pour l’instant, ou résultat observé."></textarea><p class="field-help">Laissez vide si la partie ou le résultat est encore en cours.</p></div></div>
+              <div class="check-row"><label class="check-control"><input id="needsReview" type="checkbox"><span>Ajouter à la file de review</span></label><label class="check-control"><input id="makeDrill" type="checkbox"><span>Créer aussi un drill</span></label></div>
+              <div class="form-actions"><button id="captureSubmit" class="button button-primary" type="submit">Enregistrer la décision <kbd>⌘↵</kbd></button><span class="muted">Sauvegarde locale immédiate.</span></div>
+            </article>
+            <details id="captureDetails" class="details-panel"><summary>Ajouter les détails pour la review</summary><div class="details-content"><div class="form-grid"><div class="field"><label for="matchDate">Date</label><input id="matchDate" type="date"></div><div class="field"><label for="matchPatch">Patch</label><input id="matchPatch" placeholder="Ex. 14.6"></div><div class="field"><label for="placement">Placement</label><input id="placement" type="number" min="1" max="8"></div><div class="field"><label for="lpChange">LP</label><input id="lpChange" type="number" value="0"></div><div class="field"><label for="comp">Composition</label><input id="comp"></div><div class="field"><label for="matchUrl">Lien de partie</label><input id="matchUrl" type="url" placeholder="https://…"></div><div class="field"><label for="confidence">Confiance initiale</label><select id="confidence"><option value="1">1 — très faible</option><option value="2">2 — faible</option><option value="3" selected>3 — moyenne</option><option value="4">4 — forte</option><option value="5">5 — très forte</option></select></div><div class="field"><label for="cost">Coût estimé de l’erreur</label><select id="cost"><option value="1">1 — faible</option><option value="2">2</option><option value="3" selected>3 — moyen</option><option value="4">4</option><option value="5">5 — très élevé</option></select></div><div class="field"><label for="playerId">Joueur pro comparable</label><select id="playerId"><option value="">Aucun</option></select></div><div class="field"><label for="vodRef">VOD / timestamp</label><input id="vodRef" placeholder="URL ou 18:42"></div><div class="field field-wide"><label for="alternatives">Alternatives réellement disponibles</label><textarea id="alternatives" rows="2" placeholder="A / B / C — pas les options découvertes après coup."></textarea></div><div class="field field-wide"><label for="prediction">Prédiction initiale *</label><textarea id="prediction" rows="2" required placeholder="Ce que vous pensiez qu’il allait se passer."></textarea></div><div class="field field-wide"><label for="principle">Principe provisoire</label><textarea id="principle" rows="2" placeholder="Lorsque…, privilégier…, sauf si…"></textarea></div></div></div></details>
+          </form>
+        </section>
+
+        <section id="reviews" class="view" aria-labelledby="reviews-heading"><div class="page-heading"><div><p class="eyebrow">Analyse</p><h1 id="reviews-heading">Reviews</h1><p class="lede">Traitez les cas incertains ou coûteux, pas chaque décision.</p></div><label class="inline-select" for="reviewFilter">Afficher<select id="reviewFilter"><option value="open">À revoir</option><option value="done">Terminées</option><option value="all">Toutes</option></select></label></div><div id="reviewList" class="review-list"></div></section>
+
+        <section id="drills" class="view" aria-labelledby="drills-heading"><div class="page-heading"><div><p class="eyebrow">Répétition espacée</p><h1 id="drills-heading">Drills</h1><p class="lede">Répondez avant la référence. Votre auto-évaluation prépare la prochaine échéance.</p></div><button id="addDrillBtn" class="button button-secondary">Créer un drill</button></div><div id="drillSession"></div><article class="panel"><div class="panel-heading"><div><p class="eyebrow">Bibliothèque</p><h2>À venir et suspendus</h2></div></div><div id="drillList"></div></article></section>
+
+        <section id="watchlist" class="view" aria-labelledby="watchlist-heading"><div class="page-heading"><div><p class="eyebrow">Observer</p><h1 id="watchlist-heading">Watchlist</h1><p class="lede">Des sujets à observer avec une intention précise.</p></div><button id="addPlayerBtn" class="button button-secondary">Ajouter un sujet</button></div><div id="watchlistGrid" class="watchlist-grid"></div></section>
+
+        <section id="data" class="view" aria-labelledby="data-heading"><div class="page-heading"><div><p class="eyebrow">Local et contrôlable</p><h1 id="data-heading">Données et maintenance</h1><p class="lede">Rien ne quitte ce navigateur. Exportez régulièrement votre sauvegarde complète.</p></div></div><div class="data-grid"><article class="panel"><p class="eyebrow">Sauvegarde</p><h2>Vos données restent locales</h2><p class="muted">Le JSON contient toute la base. Le CSV sert à analyser vos décisions ailleurs. L’import fusionne les identifiants et ne remplace pas silencieusement votre base.</p><div class="stack"><button id="exportJsonBtn" class="button button-primary">Exporter le JSON complet</button><label class="file-button">Importer et fusionner un JSON<input id="importFile" type="file" accept=".json,application/json"></label><button id="exportCsvBtn" class="button button-secondary">Exporter le CSV analytique</button></div></article><article class="panel danger-zone"><p class="eyebrow">Maintenance</p><h2>Intégrité et réinitialisation</h2><p class="muted">Le nettoyage ne touche qu’aux liens orphelins. La réinitialisation crée d’abord une sauvegarde locale de secours dans ce navigateur.</p><div class="stack"><button id="cleanupBtn" class="button button-secondary">Nettoyer les liens orphelins</button><button id="resetBtn" class="button button-danger">Réinitialiser les données locales</button></div></article></div><article class="panel"><div class="panel-heading"><div><p class="eyebrow">Diagnostic</p><h2>État de la base</h2></div></div><div id="diagnostic"></div></article><article class="panel"><div class="panel-heading"><div><p class="eyebrow">Journal</p><h2>Activité récente</h2></div></div><div id="auditLog"></div></article></section>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="modal" class="modal"><form id="modalForm" class="stack"><div class="modal-heading"><h2 id="modalTitle"></h2><button type="button" id="modalClose" class="icon-button" aria-label="Fermer la fenêtre">Fermer</button></div><div id="modalBody"></div><div class="dialog-actions"><button type="button" id="modalCancel" class="button button-quiet">Annuler</button><button id="modalSave" class="button button-primary">Enregistrer</button></div></form></dialog>
+  <dialog id="confirmDialog" class="modal confirm-dialog"><form method="dialog" class="stack"><p class="eyebrow">Confirmation requise</p><h2 id="confirmTitle">Confirmer l’action</h2><p id="confirmMessage"></p><div class="dialog-actions"><button value="cancel" class="button button-quiet">Annuler</button><button id="confirmAction" value="confirm" class="button button-danger">Confirmer</button></div></form></dialog>
+  <dialog id="moreNavDialog" class="modal more-nav-dialog"><form method="dialog" class="stack"><div class="modal-heading"><h2>Plus</h2><button value="cancel" class="icon-button">Fermer</button></div><button class="button button-secondary" data-view="watchlist" value="cancel">Watchlist</button><button class="button button-secondary" data-view="data" value="cancel">Données et maintenance</button></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+  <script src="core.js"></script><script src="app.js"></script>
+</body>
+</html>

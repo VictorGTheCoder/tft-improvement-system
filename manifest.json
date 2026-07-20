@@ -1,0 +1,8 @@
+{
+  "name": "TFT Challenger Lab",
+  "short_name": "TFT Lab",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#10131a",
+  "theme_color": "#10131a"
+}
