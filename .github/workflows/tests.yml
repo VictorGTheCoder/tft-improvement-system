@@ -1,0 +1,36 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+      - 'agent/**'
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  node-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check JavaScript syntax
+        run: |
+          node --check core.js
+          node --check app.js
+          node --check integrations/overwolf/capture-core.js
+          node --check integrations/overwolf/provider.js
+          node --check integrations/overwolf/capture-engine.js
+          node --check electron/main.js
+          node --check electron/preload.js
+      - name: Run tests
+        run: npm test
