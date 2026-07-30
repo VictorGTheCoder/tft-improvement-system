@@ -23,6 +23,16 @@ const ALLOWED_INFO_KEYS = new Set([
   'bench.bench_pieces'
 ]);
 
+const ALLOWED_EVENT_NAMES = new Set([
+  'match_start',
+  'match_end',
+  'round_start',
+  'round_end',
+  'battle_start',
+  'battle_end',
+  'shop_visible'
+]);
+
 function nowIso() {
   return new Date().toISOString();
 }
@@ -149,12 +159,22 @@ function inProgress(value) {
 
 function appendDiagnostic(state, event) {
   let safeValue = event.value;
-  try {
-    const serialized = JSON.stringify(safeValue);
-    if (serialized && serialized.length > 4000) safeValue = `${serialized.slice(0, 4000)}…`;
-  } catch (_) {
-    safeValue = '[unserializable payload]';
+  const filteredInfo = event.kind === 'info' && !isAllowedInfo(event);
+  const filteredGameEvent = event.kind === 'event' && !ALLOWED_EVENT_NAMES.has(event.name);
+
+  if (filteredInfo) {
+    safeValue = `[filtered ${event.category}.${event.key}]`;
+  } else if (filteredGameEvent) {
+    safeValue = `[filtered event ${event.name}]`;
+  } else {
+    try {
+      const serialized = JSON.stringify(safeValue);
+      if (serialized && serialized.length > 4000) safeValue = `${serialized.slice(0, 4000)}…`;
+    } catch (_) {
+      safeValue = '[unserializable payload]';
+    }
   }
+
   state.diagnostics.push({ ...event, value: safeValue });
   if (state.diagnostics.length > MAX_DIAGNOSTICS) {
     state.diagnostics = state.diagnostics.slice(-MAX_DIAGNOSTICS);
@@ -317,6 +337,7 @@ module.exports = {
   CAPTURE_VERSION,
   IMPORTANT_STAGES,
   ALLOWED_INFO_KEYS,
+  ALLOWED_EVENT_NAMES,
   parseValue,
   normalizeInfoUpdate,
   normalizeGameEvent,
