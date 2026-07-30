@@ -1,53 +1,79 @@
-# TFT Challenger Lab local — version 2
+# TFT Improvement System
 
-Application personnelle et locale. Aucun compte, serveur distant ou envoi de données.
+Open-source, local-first training application for Teamfight Tactics players. It helps players capture decisions, run post-game reviews and convert recurring situations into spaced-repetition drills.
 
-## Démarrage
+No account or remote server is required. Learning data stays on the user's device unless the user explicitly exports it.
 
-- **Windows** : double-cliquer sur `start.bat`.
-- **macOS/Linux** : exécuter `./start.sh`.
-- **Sans Python** : ouvrir directement `index.html` dans un navigateur moderne.
+## Browser version
 
-Adresse locale habituelle : `http://localhost:8765`.
+- **Windows**: double-click `start.bat`.
+- **macOS/Linux**: run `./start.sh`.
+- **Without Python**: open `index.html` in a modern browser.
 
-## Boucle d'utilisation
+Default local address: `http://localhost:8765`.
 
-1. Définir une compétence mesurable pour le bloc.
-2. Après une partie, capturer une décision importante en moins de deux minutes.
-3. Envoyer les cas incertains ou coûteux dans la file de review.
-4. Extraire un principe conditionnel.
-5. Créer un drill et le retester aux dates proposées.
+## Training loop
 
-## Fonctions
+1. Define one measurable skill for the block.
+2. Capture an important decision after a match.
+3. Send uncertain or costly cases to review.
+4. Extract a conditional principle.
+5. Create a drill and retest it later.
 
-- capture, modification et suppression en cascade ;
-- liaison des décisions à un joueur professionnel comparable ;
-- contexte, alternatives, prédiction et résultat séparés ;
-- reviews avec notes ;
-- drills espacés, réponses conservées et suspension ;
-- watchlist modifiable ;
-- recherche dans les décisions ;
-- export JSON, import fusionné et export CSV ;
-- migration automatique depuis la version 1 ;
-- diagnostic d'intégrité et journal d'audit ;
-- sauvegarde pré-réinitialisation dans le navigateur.
+## Main features
 
-## Sauvegarde
+- decision capture, editing and cascade deletion;
+- structured context, alternatives, prediction and outcome;
+- guided post-game reviews;
+- spaced-repetition drills;
+- measurable training goals;
+- professional-player watchlist;
+- decision search;
+- JSON backup and CSV export;
+- local data integrity diagnostics.
 
-Les données sont stockées dans le `localStorage` du navigateur. Elles peuvent disparaître si les données du navigateur sont nettoyées.
+## Experimental Overwolf integration
 
-Exporter un JSON au minimum une fois par semaine et conserver plusieurs versions. L'import fusionne les identifiants au lieu d'effacer silencieusement la base existante.
+The branch `agent/prepare-overwolf-gep-integration` adds an OW-Electron shell and prepares passive TFT data capture through the Overwolf Game Events Provider.
+
+The integration includes:
+
+- a real GEP provider that can be enabled after Overwolf approval;
+- a mock provider for development without credentials;
+- strict allow-list filtering for local-player data;
+- isolated session and snapshot storage;
+- a diagnostic panel inside the existing dashboard;
+- automated tests for normalization and capture behavior.
+
+It does not collect augments or opponent boards and does not provide live gameplay recommendations.
+
+See [`docs/OVERWOLF_INTEGRATION.md`](docs/OVERWOLF_INTEGRATION.md) for setup and validation details.
 
 ## Tests
 
-Le moteur de données est dans `core.js`. Pour exécuter ses tests :
+Browser data-engine tests:
 
 ```bash
 node test-core.js
 ```
 
-Les tests vérifient l'ajout, la modification, la suppression en cascade, les reviews, les drills, leur planification et la fusion d'une sauvegarde.
+All tests, including the Overwolf capture tests:
 
-## Limites volontaires
+```bash
+npm install
+npm test
+```
 
-Cette application ne remplace pas Tactics.tools, MetaTFT ou les VOD. Elle ne récupère pas automatiquement les parties et ne prétend pas juger objectivement une décision. Elle sert uniquement à réduire la friction de l'apprentissage personnel.
+## Backups
+
+Browser data is stored in `localStorage`. Export a JSON backup regularly and before major application updates.
+
+Overwolf capture diagnostics are stored separately in the Electron user-data directory. Captured events are not automatically inserted into the learning database until their reliability has been validated with real TFT matches.
+
+## Competitive integrity
+
+TFT Improvement System is designed for passive capture and post-game learning. It must not tell a player when to roll, level, buy, sell, pivot or reposition during a live match. It must not automate scouting or collect opponent board data.
+
+## Riot Games disclaimer
+
+TFT Improvement System isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
