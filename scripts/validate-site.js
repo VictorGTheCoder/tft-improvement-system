@@ -11,6 +11,7 @@ const requiredFiles = [
   'demo.html',
   'demo.js',
   'styles.css',
+  'reviewer.html',
   'privacy.html',
   'terms.html',
   'compliance.html',
@@ -63,5 +64,9 @@ assert.match(privacy, /Riot Sign On is not currently used/i, 'Privacy Policy mus
 
 const terms = fs.readFileSync(path.join(site, 'terms.html'), 'utf8');
 assert.match(terms, /Competitive integrity/i, 'Terms must contain a competitive-integrity section');
+
+const reviewer = fs.readFileSync(path.join(site, 'reviewer.html'), 'utf8');
+assert.match(reviewer, /Five-minute review path/i, 'Reviewer page must provide a concise test flow');
+assert.match(reviewer, /does not currently call the Riot Games API/i, 'Reviewer page must disclose current Riot API usage');
 
 console.log(`Validated ${requiredFiles.length} public site files and ${htmlFiles.length} HTML pages.`);
