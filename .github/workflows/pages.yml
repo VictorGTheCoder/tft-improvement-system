@@ -41,6 +41,7 @@ jobs:
           set -euo pipefail
           test -f _site/index.html
           test -f _site/demo.html
+          test -f _site/reviewer.html
           test -f _site/privacy.html
           test -f _site/terms.html
           test -f _site/compliance.html
