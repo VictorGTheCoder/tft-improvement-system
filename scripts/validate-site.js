@@ -70,7 +70,7 @@ assert.match(reviewer, /Five-minute review path/i, 'Reviewer page must provide a
 assert.match(reviewer, /does not currently call the Riot Games API/i, 'Reviewer page must disclose current Riot API usage');
 
 const compliance = fs.readFileSync(path.join(site, 'compliance.html'), 'utf8');
-assert.match(compliance, /uses no Riot or Teamfight Tactics logo/i, 'Compliance page must state the brand-asset boundary');
+assert.match(compliance, /use no Riot or Teamfight Tactics logo/i, 'Compliance page must state the brand-asset boundary');
 assert.match(compliance, /does not imitate the Teamfight Tactics client/i, 'Compliance page must state that the product is visually independent');
 
 console.log(`Validated ${requiredFiles.length} public site files and ${htmlFiles.length} HTML pages.`);
