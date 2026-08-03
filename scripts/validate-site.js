@@ -60,7 +60,7 @@ assert.ok(demoScript.includes("match_end"), 'Demo must complete the post-game tr
 
 const privacy = fs.readFileSync(path.join(site, 'privacy.html'), 'utf8');
 assert.match(privacy, /local storage/i, 'Privacy Policy must describe browser local storage');
-assert.match(privacy, /Riot Sign On is not currently used/i, 'Privacy Policy must disclose current RSO status');
+assert.match(privacy, /does not use Riot Sign On/i, 'Privacy Policy must disclose current RSO status');
 
 const terms = fs.readFileSync(path.join(site, 'terms.html'), 'utf8');
 assert.match(terms, /Competitive integrity/i, 'Terms must contain a competitive-integrity section');
@@ -68,5 +68,9 @@ assert.match(terms, /Competitive integrity/i, 'Terms must contain a competitive-
 const reviewer = fs.readFileSync(path.join(site, 'reviewer.html'), 'utf8');
 assert.match(reviewer, /Five-minute review path/i, 'Reviewer page must provide a concise test flow');
 assert.match(reviewer, /does not currently call the Riot Games API/i, 'Reviewer page must disclose current Riot API usage');
+
+const compliance = fs.readFileSync(path.join(site, 'compliance.html'), 'utf8');
+assert.match(compliance, /uses no Riot or Teamfight Tactics logo/i, 'Compliance page must state the brand-asset boundary');
+assert.match(compliance, /does not imitate the Teamfight Tactics client/i, 'Compliance page must state that the product is visually independent');
 
 console.log(`Validated ${requiredFiles.length} public site files and ${htmlFiles.length} HTML pages.`);
