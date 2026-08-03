@@ -1,0 +1,47 @@
+name: Game compliance concern
+description: Report a feature or behavior that may conflict with Riot or Overwolf policy.
+title: "[Compliance] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Compliance concerns are treated as release-blocking until reviewed. Do not publish private account data or exploit details.
+  - type: dropdown
+    id: category
+    attributes:
+      label: Concern category
+      options:
+        - Dynamic live recommendation
+        - Opponent board or bench collection
+        - Automated scouting or opponent tracking
+        - Augment or Legend performance data
+        - Gameplay automation
+        - Advertising during active gameplay
+        - Data privacy or retention
+        - Other Riot or Overwolf policy concern
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: Identify the screen, action and result without including private information.
+    validations:
+      required: true
+  - type: textarea
+    id: policy
+    attributes:
+      label: Relevant policy or expected boundary
+      description: Include a public policy link when available.
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: This report contains no credentials, tokens, private account information or unredacted payloads.
+          required: true
