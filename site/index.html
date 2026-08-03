@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TFT Improvement System is a local-first post-game training application for Teamfight Tactics players.">
+  <meta name="theme-color" content="#0b0d12">
+  <title>TFT Improvement System — Post-game training for Teamfight Tactics</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="TFT Improvement System home"><span class="brand-mark">TIS</span><span>TFT Improvement System</span></a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="demo.html">Live-capture demo</a>
+        <a href="reviewer.html">Reviewer dossier</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="support.html">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Post-game learning, not live coaching</p>
+          <h1>Turn TFT decisions into deliberate practice.</h1>
+          <p class="lede">TFT Improvement System helps players capture uncertain decisions, review them after the match, identify recurring mistakes and create spaced-repetition drills. The application is local-first and does not prescribe actions during active gameplay.</p>
+          <div class="actions">
+            <a class="button button-primary" href="app/">Open the working prototype</a>
+            <a class="button" href="demo.html">Run the simulated capture</a>
+            <a class="button button-quiet" href="https://github.com/VictorGTheCoder/tft-improvement-system">View source</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-label="Product interface preview">
+          <div class="mock-window">
+            <div class="mock-top"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
+            <div class="mock-body">
+              <div class="mock-goal"><p class="eyebrow">Training objective</p><strong>Scout before each major commitment.</strong></div>
+              <div class="mock-columns">
+                <div class="mock-row"><strong>Reviews</strong><span>Compare prediction, action and outcome.</span></div>
+                <div class="mock-row"><strong>Drills due</strong><span>Retest principles in spaced intervals.</span></div>
+                <div class="mock-row"><strong>Decision journal</strong><span>Record context without hindsight.</span></div>
+                <div class="mock-row"><strong>Local capture</strong><span>Prefill post-game context after validation.</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">User flow</p><h2>Play, capture, review, retest.</h2></div>
+          <p>The product is built around long-term improvement. It does not attempt to solve the live game state or replace player judgment.</p>
+        </div>
+        <div class="grid-3">
+          <article class="card"><span class="number">1</span><h3>Set one training objective</h3><p>The player selects a measurable skill for a short block of games, such as economy discipline or scouting before a major commitment.</p></article>
+          <article class="card"><span class="number">2</span><h3>Capture the local match context</h3><p>The current prototype supports manual capture. The planned Overwolf integration passively records supported local-player data and stores it locally.</p></article>
+          <article class="card"><span class="number">3</span><h3>Review after the match</h3><p>The player compares the information available at the time, the alternatives considered, the prediction, the action and the observed outcome.</p></article>
+          <article class="card"><span class="number">4</span><h3>Extract a conditional principle</h3><p>The review produces a rule with conditions and exceptions instead of a generic statement based only on placement.</p></article>
+          <article class="card"><span class="number">5</span><h3>Create a drill</h3><p>Important situations become spaced-repetition questions, allowing the player to retest reasoning outside a live match.</p></article>
+          <article class="card"><span class="number">6</span><h3>Measure recurring mistakes</h3><p>The journal makes repeated decision patterns visible over several games without giving dynamic recommendations during play.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <article class="card">
+          <p class="eyebrow">Currently functional</p>
+          <h2>Working browser prototype</h2>
+          <ul class="status-list">
+            <li>Training objectives and decision journal</li>
+            <li>Guided post-game reviews</li>
+            <li>Spaced-repetition drills</li>
+            <li>Watchlist and decision search</li>
+            <li>Local storage, JSON backup and CSV export</li>
+            <li>Data-integrity diagnostics and cascade deletion</li>
+          </ul>
+          <div class="actions"><a class="button button-primary" href="app/">Test the prototype</a></div>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Prepared integration</p>
+          <h2>Passive Overwolf capture</h2>
+          <ul class="status-list">
+            <li>OW-Electron shell and isolated GEP provider</li>
+            <li>Mock provider testable without credentials</li>
+            <li>Allow-listed local-player data only</li>
+            <li>Important-stage snapshots stored locally</li>
+            <li>Malformed and unavailable events handled safely</li>
+            <li>Automated normalization and filtering tests</li>
+          </ul>
+          <div class="actions"><a class="button" href="demo.html">Test the simulated user flow</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <div><p class="eyebrow">Competitive integrity</p><h2>Explicit safety boundaries</h2></div>
+          <p>The product is designed for passive capture and post-game reflection, consistent with Riot's stated support for tools that help players improve over time.</p>
+        </div>
+        <div class="grid-2">
+          <article class="card">
+            <h3>The application may</h3>
+            <ul class="status-list">
+              <li>Record supported data belonging to the local player</li>
+              <li>Prefill context for a post-game review</li>
+              <li>Help the player identify recurring mistakes over time</li>
+              <li>Show static training objectives outside active gameplay</li>
+              <li>Create drills from completed reviews</li>
+            </ul>
+          </article>
+          <article class="card">
+            <h3>The application will not</h3>
+            <ul class="status-list blocked">
+              <li>Tell a player when to roll, level, buy, sell or pivot</li>
+              <li>Adapt recommendations to the current live game state</li>
+              <li>Automate scouting or track opponent actions</li>
+              <li>Collect or display opponent boards or benches</li>
+              <li>Use prohibited augment or Legend performance data</li>
+            </ul>
+          </article>
+        </div>
+        <div class="actions"><a class="button" href="compliance.html">Read the full compliance statement</a></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid-2">
+        <article class="card">
+          <p class="eyebrow">Privacy by default</p>
+          <h2>No account or central player database</h2>
+          <p>Training records remain in the browser's local storage. The experimental desktop capture writes a separate local file. The public website contains no analytics scripts, tracking pixels or advertising.</p>
+          <div class="actions"><a class="button" href="privacy.html">Privacy Policy</a></div>
+        </article>
+        <article class="card">
+          <p class="eyebrow">Public distribution plan</p>
+          <h2>Free core features</h2>
+          <p>The planned Overwolf release will keep the core training workflow free. Monetization is intended to use non-intrusive Overwolf-supported advertising outside active gameplay, with a possible optional ad-free subscription later.</p>
+          <div class="actions"><a class="button" href="terms.html">Terms of Service</a></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section section-muted">
+      <div class="narrow">
+        <p class="eyebrow">Riot reviewer path</p>
+        <h2>Everything needed to evaluate the intended player experience</h2>
+        <p class="lede">Reviewers can use the product without creating an account or installing software.</p>
+        <ol>
+          <li>Open the <a href="app/">working browser prototype</a>.</li>
+          <li>Create a training objective on the Today screen.</li>
+          <li>Add a decision and mark it for review.</li>
+          <li>Complete the review and create a drill.</li>
+          <li>Open the <a href="demo.html">simulated Overwolf capture</a> to inspect the planned passive data flow.</li>
+          <li>Read the <a href="compliance.html">competitive-integrity statement</a>, <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a>.</li>
+        </ol>
+        <div class="actions"><a class="button button-primary" href="reviewer.html">Open the reviewer dossier</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div><strong>TFT Improvement System</strong><p class="meta">A public-source, local-first TFT training project.</p></div>
+        <nav class="footer-links" aria-label="Footer navigation"><a href="reviewer.html">Reviewer dossier</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="compliance.html">Compliance</a><a href="support.html">Support</a><a href="https://github.com/VictorGTheCoder/tft-improvement-system">GitHub</a></nav>
+      </div>
+      <p class="disclaimer">TFT Improvement System isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    </div>
+  </footer>
+</body>
+</html>

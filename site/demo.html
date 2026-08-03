@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interactive simulation of the planned passive Overwolf TFT capture flow.">
+  <meta name="theme-color" content="#0b0d12">
+  <title>Simulated capture — TFT Improvement System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./"><span class="brand-mark">TIS</span><span>TFT Improvement System</span></a>
+      <nav class="site-nav" aria-label="Main navigation"><a href="./">Product</a><a href="demo.html">Demo</a><a href="compliance.html">Compliance</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="./">Home</a><span>/</span><span>Simulated capture</span></div>
+        <p class="eyebrow">Reviewer demonstration</p>
+        <h1>Passive local-player capture, simulated.</h1>
+        <p class="lede">This page demonstrates the intended user flow before Overwolf credentials are available. Every event below is synthetic and runs only in this browser tab. No game process or player account is accessed.</p>
+      </div>
+    </section>
+
+    <section class="container demo-layout">
+      <article class="demo-panel">
+        <p class="eyebrow">Capture session</p>
+        <h2>Local match context</h2>
+        <p id="demoStatus" class="demo-status" data-status="idle" aria-live="polite">Ready to simulate</p>
+        <div class="demo-controls"><button id="startDemo" class="button button-primary" type="button">Start simulated match</button><button id="resetDemo" class="button" type="button">Reset</button></div>
+
+        <div class="metrics" aria-label="Current simulated local-player metrics">
+          <div class="metric"><span>Stage</span><strong id="metricStage">—</strong></div>
+          <div class="metric"><span>Health</span><strong id="metricHealth">—</strong></div>
+          <div class="metric"><span>Gold</span><strong id="metricGold">—</strong></div>
+          <div class="metric"><span>Level</span><strong id="metricLevel">—</strong></div>
+        </div>
+
+        <h3>Important-stage snapshots</h3>
+        <div id="timeline" class="timeline"><p class="meta">No snapshot captured yet.</p></div>
+        <div id="reviewResult" class="review-result" hidden>
+          <p class="eyebrow">Post-game action</p>
+          <h3>Review created after match end</h3>
+          <p>The completed session can prefill stage, health, gold, level, board and placement. The player still writes the decision, alternatives, prediction and learning principle.</p>
+          <div class="actions"><a class="button" href="app/">Open the review prototype</a></div>
+        </div>
+      </article>
+
+      <article class="demo-panel">
+        <p class="eyebrow">Diagnostic stream</p>
+        <h2>Allow-listed events</h2>
+        <p class="meta">Only supported local-player fields are shown. Opponent boards, opponent benches, scouting data and augment data are excluded.</p>
+        <div id="eventLog" class="event-log" aria-live="polite"><div class="event-line"><b>system</b> mock provider ready</div></div>
+      </article>
+    </section>
+
+    <section class="section section-muted">
+      <div class="container grid-2">
+        <article class="card"><p class="eyebrow">Stored locally</p><h3>Planned allow-list</h3><ul class="status-list"><li>Match and round transitions</li><li>Local health, gold, XP, level and placement</li><li>Local board, bench, items and shop when supported</li><li>Combat result and local-player damage</li></ul></article>
+        <article class="card"><p class="eyebrow">Never collected</p><h3>Excluded by design</h3><ul class="status-list blocked"><li>Opponent board or bench state</li><li>Automated scouting or opponent tracking</li><li>Augment or Legend performance statistics</li><li>Live recommendations or decision prescriptions</li></ul></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid"><div><strong>TFT Improvement System</strong><p class="meta">Synthetic reviewer demo. No Riot or Overwolf data is accessed.</p></div><nav class="footer-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="compliance.html">Compliance</a><a href="support.html">Support</a></nav></div>
+      <p class="disclaimer">TFT Improvement System isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p>
+    </div>
+  </footer>
+  <script src="demo.js"></script>
+</body>
+</html>

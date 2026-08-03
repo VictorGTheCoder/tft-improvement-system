@@ -1,6 +1,6 @@
 {
   "name": "tft-improvement-system",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Post-game learning and decision review app for Teamfight Tactics players.",
   "main": "electron/main.js",
   "author": {
@@ -17,7 +17,8 @@
     "start": "ow-electron .",
     "start:mock": "ow-electron . --mock-overwolf",
     "start:overwolf-dev": "ow-electron . --owepm-packages-url=https://electronapi-qa.overwolf.com/v2/packages",
-    "test": "node test-core.js && node tests/test-overwolf-capture.js",
+    "test": "node test-core.js && node tests/test-overwolf-capture.js && node scripts/validate-site.js",
+    "test:site": "node scripts/validate-site.js",
     "build:ow-electron": "ow-electron-builder --publish=never"
   },
   "devDependencies": {

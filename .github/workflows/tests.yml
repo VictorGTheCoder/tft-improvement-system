@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - master
+      - agent/prepare-overwolf-gep-integration
 
 permissions:
   contents: read
@@ -32,5 +33,7 @@ jobs:
           node --check integrations/overwolf/capture-engine.js
           node --check electron/main.js
           node --check electron/preload.js
+          node --check site/demo.js
+          node --check scripts/validate-site.js
       - name: Run tests
         run: npm test

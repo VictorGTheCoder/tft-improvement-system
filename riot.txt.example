@@ -1,0 +1,5 @@
+RIOT_WILL_GENERATE_THE_EXACT_VERIFICATION_STRING_AFTER_SUBMISSION
+
+Do not rename this example file to riot.txt until Riot provides the real token.
+When the token is available, create a new root file named riot.txt containing only the exact token, with no extra spaces, comments or lines.
+The GitHub Pages workflow will copy it to the public site root.
