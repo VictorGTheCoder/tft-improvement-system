@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - master
+      - agent/prepare-overwolf-gep-integration
 
 permissions:
   contents: read
