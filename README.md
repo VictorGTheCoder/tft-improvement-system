@@ -4,6 +4,25 @@ Open-source, local-first training application for Teamfight Tactics players. It 
 
 No account or remote server is required. Learning data stays on the user's device unless the user explicitly exports it.
 
+## Public product website
+
+The repository includes a complete static website for Riot and Overwolf review:
+
+- product presentation and user flow;
+- working browser prototype;
+- interactive simulated Overwolf capture;
+- reviewer dossier;
+- Privacy Policy;
+- Terms of Service;
+- competitive-integrity statement;
+- support and deletion instructions.
+
+The GitHub Pages workflow assembles the website from `site/` and publishes the browser prototype under `/app/`.
+
+Expected public URL after Pages is enabled:
+
+`https://victorgthecoder.github.io/tft-improvement-system/`
+
 ## Browser version
 
 - **Windows**: double-click `start.bat`.
@@ -49,6 +68,25 @@ It does not collect augments or opponent boards and does not provide live gamepl
 
 See [`docs/OVERWOLF_INTEGRATION.md`](docs/OVERWOLF_INTEGRATION.md) for setup and validation details.
 
+## Riot Production application
+
+Overwolf Developer Relations requires Riot approval before whitelisting the TFT integration. The complete copy-ready Riot application dossier is in:
+
+[`docs/RIOT_PRODUCTION_SUBMISSION.md`](docs/RIOT_PRODUCTION_SUBMISSION.md)
+
+It includes:
+
+- a description under 1,500 characters;
+- a detailed product description;
+- reviewer instructions;
+- data handling and monetization answers;
+- current Riot API and RSO status;
+- competitive-integrity safeguards;
+- domain verification instructions for `riot.txt`;
+- the evidence to preserve for Overwolf.
+
+The final reply template for Overwolf is in [`docs/OVERWOLF_RIOT_APPROVAL_REPLY.md`](docs/OVERWOLF_RIOT_APPROVAL_REPLY.md).
+
 ## Tests
 
 Browser data-engine tests:
@@ -57,11 +95,17 @@ Browser data-engine tests:
 node test-core.js
 ```
 
-All tests, including the Overwolf capture tests:
+All tests, including Overwolf capture and public-site validation:
 
 ```bash
 npm install
 npm test
+```
+
+Site-only validation:
+
+```bash
+npm run test:site
 ```
 
 ## Backups
@@ -69,6 +113,14 @@ npm test
 Browser data is stored in `localStorage`. Export a JSON backup regularly and before major application updates.
 
 Overwolf capture diagnostics are stored separately in the Electron user-data directory. Captured events are not automatically inserted into the learning database until their reliability has been validated with real TFT matches.
+
+## Security and support
+
+- Security reporting: [`SECURITY.md`](SECURITY.md)
+- Public support: GitHub Issues
+- License: MIT
+
+Do not publish Riot credentials, API keys, Overwolf credentials, authentication tokens or unredacted private payloads in an issue.
 
 ## Competitive integrity
 
