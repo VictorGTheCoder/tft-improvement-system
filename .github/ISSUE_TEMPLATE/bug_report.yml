@@ -1,0 +1,59 @@
+name: Bug report
+description: Report a reproducible problem in the browser, mock Electron or Overwolf integration.
+title: "[Bug] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include Riot credentials, API keys, Overwolf credentials, authentication tokens or unredacted private payloads.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Affected surface
+      options:
+        - Browser prototype
+        - OW-Electron mock mode
+        - Live Overwolf mode
+        - Public product website
+        - Data import/export
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: v0.4.0 or commit SHA
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide the shortest reproducible sequence.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, Windows, Node and Overwolf versions where relevant.
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I removed credentials, tokens, private account information and unredacted payloads.
+          required: true
