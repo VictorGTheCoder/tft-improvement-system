@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Competitive integrity and game compliance statement for TFT Improvement System.">
+  <meta name="theme-color" content="#0b0d12">
+  <title>Competitive integrity — TFT Improvement System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="./"><span class="brand-mark">TIS</span><span>TFT Improvement System</span></a><nav class="site-nav"><a href="./">Product</a><a href="demo.html">Demo</a><a href="compliance.html">Compliance</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a></nav></div></header>
+  <main id="main">
+    <section class="page-hero"><div class="narrow"><div class="breadcrumb"><a href="./">Home</a><span>/</span><span>Compliance</span></div><p class="eyebrow">Competitive integrity</p><h1>Post-game analysis only.</h1><p class="lede">TFT Improvement System is designed to improve player reasoning over time, not to solve the current match or bypass a skill test.</p><p class="meta">Last reviewed: August 3, 2026</p></div></section>
+    <section class="legal"><article class="narrow legal-card">
+      <h2>Product classification</h2>
+      <p>The product is a public training application intended for distribution through the Overwolf ecosystem. Its primary value is a structured learning workflow: decision capture, post-game review, conditional principles and spaced-repetition drills.</p>
+
+      <h2>Live behavior</h2>
+      <p>During active gameplay, the planned integration performs passive collection only. It does not display contextual recommendations, alerts that prescribe actions or an overlay that obstructs the game.</p>
+      <div class="callout"><p>The application will not tell a player to roll, level, buy, sell, pivot, position, combine items or choose an augment based on the current game state.</p></div>
+
+      <h2>Post-game behavior</h2>
+      <p>After the match, the application may use supported local-player information to prefill factual context such as stage, health, gold, level, board state and final placement. The player remains responsible for identifying the decision, alternatives, prediction and learning principle.</p>
+
+      <h2>Data allow-list</h2>
+      <p>The initial live integration requests only the minimum Overwolf GEP features needed for the local-player workflow:</p>
+      <ul>
+        <li>game and match state;</li>
+        <li>local player health, gold, XP, level and placement;</li>
+        <li>local board, bench, items and shop when supported;</li>
+        <li>round transitions, combat results and local-player damage when supported.</li>
+      </ul>
+
+      <h2>Prohibited and excluded uses</h2>
+      <ul>
+        <li>No opponent board or bench collection.</li>
+        <li>No automated scouting or opponent-action tracking.</li>
+        <li>No dynamic real-time information that dictates player decisions.</li>
+        <li>No automated gameplay, input simulation or queue interaction.</li>
+        <li>No augment or Legend win rates or average placements.</li>
+        <li>No attempt to bypass a short-term information-tracking skill test.</li>
+        <li>No account discrimination, queue dodging or player profiling.</li>
+      </ul>
+
+      <h2>Technical enforcement</h2>
+      <p>The experimental capture engine uses an explicit field allow-list. Unknown and prohibited fields are rejected before being applied to a session. Rejected payload contents are redacted from diagnostics. Capture data is isolated from the learning database until event reliability has been validated with real matches.</p>
+
+      <h2>Advertising</h2>
+      <p>The prototype contains no advertising. The planned public release may use Overwolf-supported advertising only in desktop or post-game surfaces. Ads will not appear during active gameplay, cover game UI or influence training recommendations.</p>
+
+      <h2>Policy-change process</h2>
+      <p>New features involving game data, account access, remote storage, recommendations or monetization will be reviewed against current Riot and Overwolf policies before release. The Riot Developer Portal product metadata will be updated when required.</p>
+
+      <h2>Primary policy references</h2>
+      <ul>
+        <li><a href="https://developer.riotgames.com/docs/tft">Riot Games Teamfight Tactics Developer API Policy</a></li>
+        <li><a href="https://developer.riotgames.com/policies/general">Riot Games General Policies</a></li>
+        <li><a href="https://dev.overwolf.com/ow-electron/guides/game-compliance/teamfight-tactics/">Overwolf Teamfight Tactics compliance guidelines</a></li>
+        <li><a href="https://dev.overwolf.com/ow-electron/guides/game-compliance/riot-games/">Overwolf Riot Games compliance guidelines</a></li>
+      </ul>
+
+      <h2>Reporting a concern</h2>
+      <p>Potential compliance problems can be reported through the project's <a href="https://github.com/VictorGTheCoder/tft-improvement-system/issues">GitHub issue tracker</a>. Reports should identify the relevant screen, feature and policy concern without including private account information.</p>
+    </article></section>
+  </main>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><strong>TFT Improvement System</strong><p class="meta">Passive capture and post-game learning.</p></div><nav class="footer-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="compliance.html">Compliance</a><a href="support.html">Support</a></nav></div><p class="disclaimer">TFT Improvement System isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p></div></footer>
+</body>
+</html>
