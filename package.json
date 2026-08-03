@@ -1,0 +1,61 @@
+{
+  "name": "tft-improvement-system",
+  "version": "0.3.0",
+  "description": "Post-game learning and decision review app for Teamfight Tactics players.",
+  "main": "electron/main.js",
+  "author": {
+    "name": "VictorGTheCoder"
+  },
+  "productName": "TFT Improvement System",
+  "license": "MIT",
+  "overwolf": {
+    "packages": [
+      "gep"
+    ]
+  },
+  "scripts": {
+    "start": "ow-electron .",
+    "start:mock": "ow-electron . --mock-overwolf",
+    "start:overwolf-dev": "ow-electron . --owepm-packages-url=https://electronapi-qa.overwolf.com/v2/packages",
+    "test": "node test-core.js && node tests/test-overwolf-capture.js",
+    "build:ow-electron": "ow-electron-builder --publish=never"
+  },
+  "devDependencies": {
+    "@overwolf/ow-electron": "latest",
+    "@overwolf/ow-electron-builder": "latest",
+    "@overwolf/ow-electron-packages-types": "latest"
+  },
+  "build": {
+    "nodeGypRebuild": false,
+    "asar": true,
+    "productName": "TFT Improvement System",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "electron/**/*",
+      "integrations/**/*",
+      "index.html",
+      "styles.css",
+      "app.js",
+      "core.js",
+      "manifest.json",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
