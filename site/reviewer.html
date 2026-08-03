@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Reviewer dossier for the TFT Improvement System Riot Production application.">
+  <meta name="theme-color" content="#0b0d12">
+  <title>Reviewer dossier — TFT Improvement System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a class="brand" href="./"><span class="brand-mark">TIS</span><span>TFT Improvement System</span></a><nav class="site-nav"><a href="./">Product</a><a href="demo.html">Demo</a><a href="reviewer.html">Reviewer dossier</a><a href="compliance.html">Compliance</a><a href="privacy.html">Privacy</a></nav></div></header>
+  <main id="main">
+    <section class="page-hero"><div class="narrow"><div class="breadcrumb"><a href="./">Home</a><span>/</span><span>Reviewer dossier</span></div><p class="eyebrow">Riot Production application</p><h1>Reviewer dossier</h1><p class="lede">A direct path through the functional prototype, intended Overwolf flow, data handling and competitive-integrity boundaries.</p><p class="meta">Prepared August 3, 2026</p></div></section>
+    <section class="legal"><article class="narrow legal-card">
+      <h2>Product summary</h2>
+      <p>TFT Improvement System is a public, local-first post-game training application. It helps players document decisions, compare predictions with outcomes, identify recurring mistakes and create spaced-repetition drills.</p>
+
+      <h2>What is testable now</h2>
+      <ul>
+        <li>a complete browser-based decision journal;</li>
+        <li>training objectives;</li>
+        <li>guided reviews;</li>
+        <li>spaced-repetition drills;</li>
+        <li>local backup and export;</li>
+        <li>a synthetic demonstration of the planned Overwolf capture flow.</li>
+      </ul>
+
+      <h2>Five-minute review path</h2>
+      <ol>
+        <li><a href="app/">Open the browser prototype</a>.</li>
+        <li>On the Today screen, define a measurable objective.</li>
+        <li>Select “Add a decision.” Complete the required context and action fields.</li>
+        <li>Mark the decision for review and save it.</li>
+        <li>Open Reviews, complete the analysis and create a drill.</li>
+        <li>Open Drills to see the retest workflow.</li>
+        <li><a href="demo.html">Run the simulated capture</a> and watch local fields become stage snapshots.</li>
+      </ol>
+
+      <h2>Planned Overwolf behavior</h2>
+      <p>The OW-Electron scaffold and mock provider are implemented. After Overwolf whitelisting, the live provider will request only allow-listed TFT Game Events Provider features. It will store supported local-player context in a separate local file and propose a post-game review after match end.</p>
+
+      <h2>Why Riot approval is requested before live validation</h2>
+      <p>Overwolf Developer Relations requires Riot approval before approving and whitelisting the TFT application idea. Without whitelisting, the developer cannot validate real GEP payloads. The synthetic flow therefore demonstrates the intended data path without claiming that live events have already been validated.</p>
+
+      <h2>Current API status</h2>
+      <p>The product does not currently call the Riot Games API and does not use Riot Sign On. The Production registration is requested because the public product serves TFT players and is planned to integrate with TFT through Overwolf. Any future official API or account-data feature will be registered before release.</p>
+
+      <h2>Competitive-integrity boundaries</h2>
+      <ul>
+        <li>no live recommendations;</li>
+        <li>no direction to roll, level, buy, sell, pivot or reposition;</li>
+        <li>no automated scouting;</li>
+        <li>no opponent board or bench collection;</li>
+        <li>no augment or Legend performance statistics;</li>
+        <li>no automated gameplay inputs;</li>
+        <li>analysis only after the match or outside active gameplay.</li>
+      </ul>
+
+      <h2>Data model</h2>
+      <p>Browser training data remains in browser local storage. Experimental desktop capture is stored in a separate local JSON file. The project operates no central player database and the public website contains no analytics scripts.</p>
+
+      <h2>Public documents</h2>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms of Service</a></li>
+        <li><a href="compliance.html">Competitive Integrity statement</a></li>
+        <li><a href="support.html">Support and deletion instructions</a></li>
+        <li><a href="https://github.com/VictorGTheCoder/tft-improvement-system">Public source repository</a></li>
+      </ul>
+    </article></section>
+  </main>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><strong>TFT Improvement System</strong><p class="meta">Reviewer-ready public prototype.</p></div><nav class="footer-links"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="compliance.html">Compliance</a><a href="support.html">Support</a></nav></div><p class="disclaimer">TFT Improvement System isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.</p></div></footer>
+</body>
+</html>
